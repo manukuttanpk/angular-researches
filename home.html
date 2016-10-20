@@ -1,0 +1,50 @@
+﻿<html ng-app="sampleApp" ng-controller="sampleCtrl">
+<head>
+    <title>easyAutocomplete</title>
+    <!--vendors-->
+    <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" />
+    <!--easycomplete-->
+    <link rel="stylesheet" href="css/easycomplete.min.css" />
+</head>
+<body>
+
+    <!--Example-->
+    <input type="text" easy-complete=""
+           ng-model="user"
+           ec-template="headertemplate"
+           ec-showheader="true"
+           ec-valueholder="id"
+           ec-transport="transport" />
+
+    <p><b>Selected Text : </b>{{user}}</p>
+    <p><b>Selected Value : </b>{{id}}</p>
+
+    <!--vendors-->
+    <script src="js/angular.min.js" type="text/javascript"></script>
+    <script src="js/jquery.min.js" type="text/javascript"></script>
+    <script src="js/jquery.ui.min.js" type="text/javascript"></script>
+    <!--easycomplete-->
+    <script src="js/easyautocomplete.min.js" type="text/javascript"></script>
+
+    <script type="text/javascript">
+        (function (app) {
+            app.controller('sampleCtrl', function ($scope) {
+
+                // header template
+                $scope.headertemplate = [
+                    { title: 'Code', property: 'id', show: true, width: 50, type: 'value' },
+                    { title: 'Name', property: 'login', show: true, width: 300, type: 'text' }
+                ]
+                //Transport parameters
+                $scope.transport = {
+                    method: 'get',
+                    read: 'https://api.github.com/users',
+                    params: ''
+                }
+                //Control Id Holder
+                $scope.id = 1;
+            })
+        })(angular.module('sampleApp', ['easyComplete']));
+    </script>
+</body>
+</html>
